@@ -1,8 +1,10 @@
+# Here is the skeleton flask app - I'll add everything when the moodules are done
+
 import flask
 from flask import render_template
 
 # imports from other modules
-from globals import alert
+import globals
 
 
 app = flask.Flask(__name__)
@@ -14,11 +16,12 @@ def main():
 
     # get new data of BP1, BP2, Oxy, Pulse from DB
 
-    if alert is True:
+    if globals.alert is True:
         # edit html to add warning to it
-        alert = False
+        #   - use values set in globals.py file
 
-    # call Display function to get format the html
+
+    # call Display module to get format the html
 
     html = "";
 
