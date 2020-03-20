@@ -10,7 +10,7 @@ def read_pulse():
 		# Set flag to True when pulse is not normal
 		pulse_flag = True
 		pulse_value = pulse
-	elif (flag == True):
+	elif (pulse_flag == True):
 		# Set flag to False when pulse is back to normal
 		pulse_flag = False
 
