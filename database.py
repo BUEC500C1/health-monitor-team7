@@ -39,6 +39,7 @@ def find():
 
 
 #function to create a bunch of data in 30 seconds
+# this ^ generates too much data but we can still use it?
 """
 def timedEntry():
    start = time.process_time()
