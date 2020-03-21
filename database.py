@@ -23,7 +23,6 @@ def create():
         'bloodPre': blood_pressure.get_bp()
     }
     return new_patient
-    #records.insert_one(new_patient)
 
 #functoin to get latest data entry 
 def find():
@@ -55,9 +54,6 @@ def timedEntry():
 # run this function and a single dat entry will be uploaded every 30 seconds. 
 def timedDataInsert():
     new_patient = create()
-    index = 0
-    index = index +1
-    print(index)
     records.insert_one(new_patient)
     Timer(30,timedDataInsert).start()
 
