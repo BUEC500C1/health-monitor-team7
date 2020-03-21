@@ -14,4 +14,4 @@ def read_pulse():
 		# Set flag to False when pulse is back to normal
 		globals.pulse_flag = False
 
-	return pulse
+	return str(pulse)
