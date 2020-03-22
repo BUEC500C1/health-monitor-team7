@@ -50,6 +50,8 @@ class predictor():
         bloodOxygenPrediction = int(self.bloodOxygenRegression.predict(np.array([[time]])))
         print("Blood Oxygen Prediction: ",bloodOxygenPrediction)
 
+        return [pulsePrediction, bloodPressurePrediction, bloodOxygenPrediction]
+
 
 p = predictor()
 p.preprocessingData()

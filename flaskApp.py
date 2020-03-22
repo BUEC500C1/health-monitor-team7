@@ -15,9 +15,13 @@ app = flask.Flask(__name__)
 def main():
 
     # Call AI module to get prediction of BP1, BP2, Oxy Pulse
+    p = predictor()
+    p.preprocessingData()
+    p.training()
+    predictedData = p.prediction(5000)
 
     # get new data of BP1, BP2, Oxy, Pulse from DB
-    latest = database.find()
+    latestData = database.find()
 
     if globals.alert is True:
         # edit html to add warning to it
