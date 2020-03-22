@@ -20,22 +20,21 @@ class predictor():
 
     def __init__(self):
         self.healthData = pd.read_csv('healthData.csv')
-        self.timeData = self.healthData.loc[ 0:self.healthData[ 'time' ].size-1,'time' ].values
     
     def preprocessingData(self):
-        pulseData = self.healthData.loc[ 0:self.healthData[ 'pulse' ].size-1,'pulse'].values
+        pulseData = self.healthData[ 'pulse' ].values
         self.pulseData  = np.array([pulseData ]).T
 
-        bloodPressureData = self.healthData.loc[ 0:self.healthData[ 'bloodpressure' ].size-1,'bloodpressure'].values
+        bloodPressureData = self.healthData['bloodpressure' ].values
         self.bloodPressureData = np.array([bloodPressureData]).T
 
-        bloodOxygenData =self.healthData.loc[ 0:self.healthData[ 'bloodoxygen' ].size-1,'bloodoxygen' ].values
+        bloodOxygenData =self.healthData[ 'bloodoxygen' ].values
         self.bloodOxygenData = np.array([bloodOxygenData]).T
 
-        self.timeData = np.array([ self.timeData ]).T
+        timeData = self.healthData[ 'time' ].values
+        self.timeData = np.array([ timeData ]).T
 
     def training(self):
-        
         self.pulseRegression.fit(self.timeData,self.pulseData )
         self.bloodPressureRegression.fit(self.timeData,self.bloodPressureData)
         self.bloodOxygenRegression.fit(self.timeData,self.bloodOxygenData)
