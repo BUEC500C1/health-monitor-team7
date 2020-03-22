@@ -1,6 +1,7 @@
 # Here is the skeleton flask app - I'll add everything when the moodules are done
 
 import flask
+from prediction import predictor
 from flask import render_template
 
 # imports from other modules
