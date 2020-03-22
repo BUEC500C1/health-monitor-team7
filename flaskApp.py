@@ -29,8 +29,7 @@ def main():
         print("HI")
 
     # call Display module to get format the html
-
-    html = ""
+    
 
     return render_template("welcome.html")
 
