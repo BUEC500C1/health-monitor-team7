@@ -1,7 +1,7 @@
 
 # Author: Elizabeth Slade
 
-    # For my prediction algorithm, i used lqi25's healthData from team: health-monitor-HealthCover 
+    # For my prediction algorithm, I used lqi25's "pulse, blood pressure, blood oxygen" csv file from team: health-monitor-HealthCover 
 
 import numpy as np
 import pandas as pd
