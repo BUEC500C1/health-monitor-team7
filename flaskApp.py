@@ -9,7 +9,7 @@ import globals
 
 app = flask.Flask(__name__)
 
-@app.route(('/')
+@app.route('/')
 def main():
 
     # Call AI module to get prediction of BP1, BP2, Oxy Pulse
@@ -19,14 +19,14 @@ def main():
     if globals.alert is True:
         # edit html to add warning to it
         #   - use values set in globals.py file
-
+        print("HI")
 
     # call Display module to get format the html
 
-    html = "";
+    html = ""
 
-    return render_template(html)
+    return render_template("welcome.html")
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
