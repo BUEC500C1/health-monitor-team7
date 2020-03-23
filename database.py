@@ -35,7 +35,15 @@ def find():
     latest = x[size-1]    
     return latest 
   
+def find_all():
+    x = []
+    cur = records.find()
+    for i in cur:
+        x.append(i)
+    #size = len(x)
+    #all = x[size-1]    
 
+    return x
 
 #function to create a bunch of data in 30 seconds
 # this ^ generates too much data but we can still use it?
@@ -56,5 +64,3 @@ def timedDataInsert():
     new_patient = create()
     records.insert_one(new_patient)
     Timer(30,timedDataInsert).start()
-
-   
