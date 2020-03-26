@@ -1,7 +1,6 @@
-
 # Author: Elizabeth Slade
 
-    # For my prediction algorithm, I used lqi25's "pulse, blood pressure, blood oxygen" csv file from team: health-monitor-HealthCover 
+    # For my prediction algorithm, I used lqi25's "pulse, blood pressure, blood oxygen" csv file from team: health-monitor-HealthCover
 
 import numpy as np
 import pandas as pd
@@ -20,7 +19,7 @@ class predictor():
 
     def __init__(self):
         self.healthData = pd.read_csv('healthData.csv')
-    
+
     def preprocessingData(self):
         pulseData = self.healthData[ 'pulse' ].values
         self.pulseData  = np.array([pulseData ]).T
@@ -47,7 +46,7 @@ class predictor():
         print("Blood Pressure Prediction: ",bloodPressurePrediction)
 
         bloodOxygenPrediction = int(self.bloodOxygenRegression.predict(np.array([[time]])))
-        print("Blood Oxygen Prediction: ",bloodOxygenPrediction)
+        print("Blood Oxygen Prediction: ", bloodOxygenPrediction)
 
         return [pulsePrediction, bloodPressurePrediction, bloodOxygenPrediction]
 

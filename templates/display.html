@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html>
+<title>Health Monitor Display</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/display.css') }}">
+<head>
+</head>
+<body>
+	<script>
+	window.onload = function () {
+		var x_dps = JSON.parse('{{data.time|tojson}}')
+		var pulse_y_dps = JSON.parse('{{data.pulse|tojson}}')
+		var bp_sys_y_dps = JSON.parse('{{data.bloodPressureSys|tojson}}')
+		var bp_dia_y_dps = JSON.parse('{{data.bloodPressureDia|tojson}}')
+		var oxygen_y_dps = JSON.parse('{{data.oxygenContent|tojson}}')
+
+		var pulse_dps = []
+		var bp_sys_dps = []
+		var bp_dia_dps = []
+		var oxygen_dps = []
+
+		for (i in x_dps) {
+			pulse_dps.push({
+				x: new Date(x_dps[i]),
+				y: parseFloat(pulse_y_dps[i])
+			})
+
+			bp_sys_dps.push({
+				x: new Date(x_dps[i]),
+				y: bp_sys_y_dps[i]
+			})
+			bp_dia_dps.push({
+				x: new Date(x_dps[i]),
+				y: bp_dia_y_dps[i]
+			})
+			oxygen_dps.push({
+				x: new Date(x_dps[i]),
+				y: parseFloat(oxygen_y_dps[i])*100
+			})
+		}
+
+		var chart = new CanvasJS.Chart("chartContainer", {
+	  animationEnabled: true,
+		zoomEnabled: true,
+		title:{
+			text: "Health Monitor",
+	    fontColor: "#ebf0f7",
+	    fontFamily: "tahoma"
+		},
+		subtitles:[{
+			text: "Click on the tags below the graph to toggle data displayed & highlight the desired portion of the graph to zoom",
+	    fontColor: "#ebf0f7",
+	    fontFamily: "tahoma"
+		}],
+	  backgroundColor: "#2a2a2a",
+	  axisX: {
+	    labelFontColor: "#ebf0f7"
+	  },
+		axisY:[
+	  {
+	    title: "Pulse",
+			lineColor: "#369EAD",
+			tickColor: "#369EAD",
+			labelFontColor: "#369EAD",
+			titleFontColor: "#369EAD",
+			suffix: "bpm"
+	  },
+		{
+	    title: "Blood Oxygen Content",
+			lineColor: "#C24642",
+			tickColor: "#C24642",
+			labelFontColor: "#C24642",
+			titleFontColor: "#C24642",
+			suffix: "%",
+			minimum: 85
+		}],
+		axisY2: [{
+			title: "Systolic Blood Pressure",
+			lineColor: "#7F6084",
+			tickColor: "#7F6084",
+			labelFontColor: "#7F6084",
+			titleFontColor: "#7F6084",
+			suffix: "mm Hg"
+		},
+		{
+			title: "Diastolic Blood Pressure",
+			lineColor: "#bdbc7b",
+			tickColor: "#bdbc7b",
+			labelFontColor: "#bdbc7b",
+			titleFontColor: "#bdbc7b",
+			suffix: "mm Hg"
+		}],
+		toolTip: {
+			shared: true
+		},
+		legend: {
+			cursor: "pointer",
+	    fontColor: "#ebf0f7",
+			itemclick: toggleDataSeries
+		},
+		data: [{
+			type: "line",
+			name: "Pulse",
+			color: "#369EAD",
+			showInLegend: true,
+			axisYIndex: 0,
+			dataPoints: pulse_dps
+		},
+		{
+			type: "line",
+			name: "Systolic Blood Pressure",
+			color: "#7F6084",
+			axisYType: "secondary",
+			axisYIndex: 0,
+			showInLegend: true,
+			dataPoints: bp_sys_dps
+		},
+		{
+			type: "line",
+			name: "Diastolic Blood Pressure",
+			color: "#bdbc7b",
+			axisYType: "secondary",
+			axisYIndex: 1,
+			showInLegend: true,
+			dataPoints: bp_dia_dps
+		},
+		{
+			type: "line",
+			name: "Blood Oxygen Content",
+			color: "#C24642",
+			axisYIndex: 1,
+			showInLegend: true,
+			dataPoints: oxygen_dps
+		}]
+	});
+	chart.render();
+
+	function toggleDataSeries(e) {
+		if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+			e.dataSeries.visible = false;
+		} else {
+			e.dataSeries.visible = true;
+		}
+		e.chart.render();
+	}
+
+	}
+	</script>
+  <div style="width:100%;text-align:center;display:flex;flex-direction: column;justify-content:center;align-items: center;height:100vh;background-color:#2a2a2a;">
+	  <div id="chartContainer" style="height: 370px; width: 80%; padding:20px;"></div>
+
+		<br />
+
+		{% if alert.bloodPressure %}
+			<h2 style="width:80%;color:#f56262;padding:5px;">Alert: Dangerous blood pressure level detected!</h2>
+		{% endif %}
+
+		{% if alert.pulse %}
+			<h2 style="width:80%;color:#f56262;padding:5px;">Alert: Dangerous pulse level detected!</h2>
+		{% endif %}
+
+		{% if alert.oxygenContent %}
+			<h2 style="width:80%;color:#f56262;padding:5px;">Alert: Dangerous blood oxygen content detected!</h2>
+		{% endif %}
+
+		<div style="width:80%;display:flex;flex-direction:row;justify-content:center;">
+			<h3 style="padding:10px;color:white;">Predicted Pulse: {{AIdata.AIpulse}} bpm</h3>
+			<h3 style="padding:10px;color:white;">Predicted Blood Pressure: {{AIdata.AIbloodPressure}} mm Hg</h3>
+			<h3 style="padding:10px;color:white;">Predicted Oxygen Content: {{AIdata.AIoxygenContent}}%</h3>
+		</div>
+	</div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>

@@ -1,12 +1,12 @@
 # health-monitor-team7
 health-monitor-team7 created by GitHub Classroom
 
-## Directions for set-up (Mac), for Windows: 
+## Directions for set-up (Mac), for Windows:
 
 https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/
 
 ### get a virtual environment
- 
+
         python3 -m venv env
 
 ### activate it
@@ -26,3 +26,5 @@ https://packaging.python.org/guides/installing-using-pip-and-virtual-environment
         pip freeze >> requirements.txt
 
     this will store your requirements so we won't have any module installation problems.
+
+### Navigate to localhost:5000 in a browser to view

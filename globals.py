@@ -6,8 +6,11 @@ pulse_flag = False
 pulse_value = 0
 
 # Blood pressure data
-bp_flag = False
-bp_value = 0
+bp_sys_flag = False
+bp_sys_value = 0
+
+bp_dia_flag = False
+bp_dia_value = 0
 
 # Oxygen data
 oxygen_flag = False
