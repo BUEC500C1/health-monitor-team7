@@ -8,7 +8,6 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 
 class predictor():
-    healthData = ""
     time = ""
     pulseData = []
     bloodPressureData = []
@@ -19,27 +18,34 @@ class predictor():
     bloodOxygenRegression = LinearRegression()
 
     def __init__(self):
-        self.healthData = pd.read_csv('healthData.csv')
-    
-    def preprocessingData(self):
-        pulseData = self.healthData[ 'pulse' ].values
+        healthData = pd.read_csv('healthData.csv')
+        
+        pulseData = healthData[ 'pulse' ].values
         self.pulseData  = np.array([pulseData ]).T
 
-        bloodPressureData = self.healthData['bloodpressure' ].values
+        bloodPressureData = healthData['bloodpressure' ].values
         self.bloodPressureData = np.array([bloodPressureData]).T
 
-        bloodOxygenData =self.healthData[ 'bloodoxygen' ].values
+        bloodOxygenData = healthData[ 'bloodoxygen' ].values
         self.bloodOxygenData = np.array([bloodOxygenData]).T
 
-        timeData = self.healthData[ 'time' ].values
+        timeData = healthData[ 'time' ].values
         self.timeData = np.array([ timeData ]).T
+    
+    def appendDataAndRetrain(self):
+        print("Pulse data:", len(self.pulseData))
+        print("blood pressure:", len(self.bloodPressureData))
+        print("blood oxy: ", len(self.bloodOxygenData))
+        
 
-    def training(self):
+    def train(self):
         self.pulseRegression.fit(self.timeData,self.pulseData )
         self.bloodPressureRegression.fit(self.timeData,self.bloodPressureData)
         self.bloodOxygenRegression.fit(self.timeData,self.bloodOxygenData)
 
-    def prediction(self, time):
+# what will this time be?
+
+    def predict(self, time):
         pulsePrediction = int(self.pulseRegression.predict(np.array([[time]])))
         print("Pulse Prediction: ",pulsePrediction)
 
@@ -53,6 +59,6 @@ class predictor():
 
 
 p = predictor()
-p.preprocessingData()
-p.training()
-p.prediction(5000)
+p.appendDataAndRetrain()
+p.train()
+p.predict(5000)
