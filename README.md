@@ -1,6 +1,13 @@
 # health-monitor-team7
 health-monitor-team7 created by GitHub Classroom
 
+## Summary
+
+## Team Roles
+
+## System Design
+
+
 ## Directions for set-up (Mac), for Windows:
 
 https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/
