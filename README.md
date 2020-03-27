@@ -43,7 +43,7 @@ The display module uses an html file to display the current and past values of a
 ## System Design
 This is the diagram overview of how every module fits into the larger scheme of the project:
 
-TODO: insert image of module diagram
+![Module Diagram](module_diagram.jpeg)
 
 ## Directions for set-up (Mac), for Windows:
 
