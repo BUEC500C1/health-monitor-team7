@@ -7,7 +7,6 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 
 class predictor():
-    time = ""
     pulseData = []
     bloodPressureData = []
     bloodOxygenData = []
@@ -18,46 +17,33 @@ class predictor():
 
     def __init__(self):
         healthData = pd.read_csv('healthData.csv')
-        
-        pulseData = healthData[ 'pulse' ].values
-        self.pulseData  = np.array([pulseData ]).T
+        self.pulseData = healthData[ 'pulse' ].values
+        self.bloodPressureData = healthData['bloodpressure' ].values
+        self.bloodOxygenData = healthData[ 'bloodoxygen' ].values
+        self.timeData = healthData[ 'time' ].values
 
-        bloodPressureData = healthData['bloodpressure' ].values
-        self.bloodPressureData = np.array([bloodPressureData]).T
 
-        bloodOxygenData = healthData[ 'bloodoxygen' ].values
-        self.bloodOxygenData = np.array([bloodOxygenData]).T
-
-        timeData = healthData[ 'time' ].values
-        self.timeData = np.array([ timeData ]).T
+    def appendData(self, measurement):
+        np.append(self.pulseData, measurement['pulse'] )
+        np.append(self.bloodPressureData, measurement['bloodPreSys'] )
+        np.append(self.bloodOxygenData, measurement['bloodOx'] )
     
-    def appendDataAndRetrain(self):
-        print("Pulse data:", len(self.pulseData))
-        print("blood pressure:", len(self.bloodPressureData))
-        print("blood oxy: ", len(self.bloodOxygenData))
-        
 
     def train(self):
-        self.pulseRegression.fit(self.timeData,self.pulseData )
-        self.bloodPressureRegression.fit(self.timeData,self.bloodPressureData)
-        self.bloodOxygenRegression.fit(self.timeData,self.bloodOxygenData)
+        pulseData  = np.array([ self.pulseData ]).T
+        bloodPressureData = np.array([ self.bloodPressureData ]).T
+        bloodOxygenData = np.array([ self.bloodOxygenData ]).T
+        timeData = np.array([ self.timeData ]).T
 
-# what will this time be?
+        self.pulseRegression.fit( timeData, pulseData )
+        self.bloodPressureRegression.fit( timeData, bloodPressureData )
+        self.bloodOxygenRegression.fit( timeData, bloodOxygenData )
+
 
     def predict(self, time):
         pulsePrediction = int(self.pulseRegression.predict(np.array([[time]])))
-        print("Pulse Prediction: ",pulsePrediction)
-
         bloodPressurePrediction = int(self.bloodPressureRegression.predict(np.array([[time]])))
-        print("Blood Pressure Prediction: ",bloodPressurePrediction)
-
         bloodOxygenPrediction = int(self.bloodOxygenRegression.predict(np.array([[time]])))
-        print("Blood Oxygen Prediction: ", bloodOxygenPrediction)
-
+        
         return [pulsePrediction, bloodPressurePrediction, bloodOxygenPrediction]
 
-
-p = predictor()
-p.appendDataAndRetrain()
-p.train()
-p.predict(5000)

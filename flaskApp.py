@@ -21,9 +21,8 @@ def main():
 
     # Call AI module to get prediction of BP1, BP2, Oxy Pulse
     p = predictor()
-    p.preprocessingData()
-    p.training()
-    predictedData = p.prediction(5000)
+    p.train()
+    predictedData = p.predict(5000)
 
     # get new data of BP1, BP2, Oxy, Pulse from DB
     # latestData = database.find()
@@ -38,6 +37,7 @@ def main():
     oxygenData = []
 
     for i in database.find_all():
+        p.appendData(i)
         x_val = i['createAt']
         pulse_val = i['pulse']
         bp_sys_val = i['bloodPreSys']
@@ -48,6 +48,9 @@ def main():
         bpSysData.append(bp_sys_val)
         bpDiaData.append(bp_dia_val)
         oxygenData.append(oxy_val)
+    
+    p.train()
+    predictedData = p.predict(5000) #5000 is time in the future
 
     alert = {'bloodPressureSys': globals.bp_sys_flag, 'bloodPressureDia': globals.bp_dia_flag,'pulse': globals.pulse_flag, 'oxygenContent': globals.oxygen_flag}
     data = {'time': timeData,'pulse': pulseData, 'bloodPressureSys': bpSysData, 'bloodPressureDia': bpDiaData,'oxygenContent': oxygenData}
