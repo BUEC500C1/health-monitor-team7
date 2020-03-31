@@ -40,12 +40,12 @@ This module is the coordinator for the project. It receives the AI predictions f
 #### Display
 ###### by Gennifer Norman
 The display module uses an html file to display the current and past values of all sensors. The values are displayed in a graph format. If any of the readings are outside of the healthy range, an alert will display for those sensors. The display is refreshed every 30 seconds as new data arrives.
+# Screenshot of our display
 ![Display Screenshot](display.jpeg)
 
 
 ## System Design
 This is the diagram overview of how every module fits into the larger scheme of the project:
-
 ![Module Diagram](module_diagram.jpeg)
 
 ## Directions for set-up (Mac), for Windows:
