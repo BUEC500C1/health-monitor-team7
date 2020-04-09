@@ -4,8 +4,17 @@ from pulse import read_pulse
 
 
 def test_blood_oxygen():
-    read_blood_oxygen()
-    assert 1 == 1
+    oxy = read_blood_oxygen()
+    assert isinstance(oxy, str)
+    
+    try:
+        oxy_num = float(oxy)
+        assert True
+    except ValueError:
+        assert False
+
+    assert oxy_num < 1.00
+    assert oxy_num > 0.90
 
 
 def test_blood_pressure():
