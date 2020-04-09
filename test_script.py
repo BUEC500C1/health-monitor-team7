@@ -34,5 +34,16 @@ def test_blood_pressure():
 
 
 def test_pulse():
-    read_pulse()
-    assert 1 == 1
+    for i in range(10000):
+        pulse = read_pulse()
+
+        assert isinstance(pulse, str)
+
+        try:
+            pulse_num = int(pulse)
+            assert True
+        except ValueError:
+            assert False
+
+        assert pulse_num > 0
+        assert pulse_num < 200

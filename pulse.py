@@ -4,7 +4,7 @@ import globals
 # Normal pulse rate of an average adult (non athlete): 60-100 beats per minute
 def read_pulse():
 	# Gives a value outside range [60,100] approx. 7% of the time
-	pulse = gauss(80, 11)
+	pulse = round(gauss(80, 11))
 
 	if pulse < 60 or pulse > 100:
 		# Set flag to True when pulse is not normal
