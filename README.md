@@ -70,7 +70,7 @@ https://packaging.python.org/guides/installing-using-pip-and-virtual-environment
 
 #### If you pip install anything in your virtual environment, make sure to:
 
-        pip freeze >> requirements.txt
+        pip3 freeze >> requirements.txt
 
     this will store your requirements so we won't have any module installation problems.
 
