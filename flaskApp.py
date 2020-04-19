@@ -1,4 +1,3 @@
-# Here is the skeleton flask app - I'll add everything when the moodules are done
 
 import flask
 from flask import render_template
@@ -48,7 +47,7 @@ def main():
         bpSysData.append(bp_sys_val)
         bpDiaData.append(bp_dia_val)
         oxygenData.append(oxy_val)
-    
+
     p.train()
     predictedData = p.predict(5000) #5000 is time in the future
 
