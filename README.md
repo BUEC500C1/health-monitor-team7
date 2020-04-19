@@ -62,7 +62,7 @@ https://packaging.python.org/guides/installing-using-pip-and-virtual-environment
 
 #### install requirements
 
-        pip install -r requirements.txt
+        pip3 install -r requirements.txt
 
 # run
 
