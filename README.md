@@ -26,8 +26,8 @@ The pulse module returns a pulse value in beats per minute when called. If the v
 
 #### Database Sender
 ###### by Rubeena Zaveri
-The DB module calls the three sensor modules every 30 seconds. Once gathering the readings, this module sends that data to the database. Below is a screenshot of the data in our database and the json format that we upload it in. 
-![Database Screenschot](db.jpeg)
+The DB module calls the three sensor modules every 30 seconds. Once gathering the readings, this module sends that data to the database. Below is a screenshot of the data in our database and the json format that we upload it in.
+![Database Screenschot](/images/db.jpeg)
 
 #### AI / Machine Learning
 ###### by Elizabeth Slade
@@ -41,13 +41,13 @@ This module is the coordinator for the project. It receives the AI predictions f
 ###### by Gennifer Norman
 The display module uses an html file to display the current and past values of all sensors. The values are displayed in a graph format. If any of the readings are outside of the healthy range, an alert will display for those sensors. The display is refreshed every 30 seconds as new data arrives.
 ##### Screenshot of our display
-![Display Screenshot](display.png)
-![Display Screenshot](display_data.png)
+![Display Screenshot](/images/display.png)
+![Display Screenshot](/images/display_data.png)
 
 
 ## System Design
 This is the diagram overview of how every module fits into the larger scheme of the project:
-![Module Diagram](module_diagram.jpeg)
+![Module Diagram](/images/module_diagram.jpeg)
 
 ## Directions for set-up (Mac), for Windows:
 
