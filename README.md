@@ -43,6 +43,7 @@ The display module uses an html file to display the current and past values of a
 ##### Screenshot of our display
 ![Display Screenshot](/images/display.png)
 ![Display Screenshot](/images/display_data.png)
+![Display Screenshot](/images/display_alert.png)
 
 
 ## System Design
